@@ -1,0 +1,25 @@
+//version of proto used
+syntax = "proto3";
+//split service, request and response into different files
+option java_multiple_files = true;
+//puts all the code generated into the package "billing"
+option java_package = "billing";
+
+//definition of the service
+service BillingService {
+    //the methods in the service, what they expect and what they return
+    rpc CreateBillingAccount(BillingRequest) returns (BillingResponse);
+}
+
+//kind of like DTO
+message BillingRequest {
+    string patientId = 1;//this is used to help serialize or deserialize this variable in grpc
+    string name = 2;
+    string email = 3;
+    //these numbers have to be unique
+}
+
+message BillingResponse {
+    string accountId = 1;
+    string status = 2;
+}
